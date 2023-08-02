@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color:black;
+            margin-top:100px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .delete {
+            color:blue;
+            cursor: pointer;
+        }
+
+        .checked {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To-Do List</h1>
+    <form>
+        <input type="text" id="item" placeholder="Enter task...">
+        <button id="addBtn">Add</button>
+    </form>
+    <ul id="list">
+    </ul>
+    <script>
+        const form = document.querySelector('form');
+        const input = document.querySelector('#item');
+        const ul = document.querySelector('#list');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            addItem();
+        });
+
+        function addItem() {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete');
+            deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+            span.textContent = input.value;
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            ul.appendChild(li);
+            input.value = '';
+            deleteBtn.addEventListener('click', function () {
+                ul.removeChild(li);
+            });
+            span.addEventListener('click', function () {
+                span.classList.toggle('checked');
+            });
+        }
+    </script>
+</body>
+
+</html>
